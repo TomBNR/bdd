@@ -25,13 +25,13 @@ function getCallbacks() {
         // connexion BDD
         $bdd = connexionBdd();
         // execution de la requete
-        $requete = $bdd->query("INSERT INTO Mesures (IdStation, NiveauEau, CumulePluie, TauxCharge, Date) VALUES ('','','','','')") ;
+        $requete = $bdd->query("INSERT INTO Mesures (IdStation, NiveauEau, CumulePluie, TauxCharge, Date) VALUES (:IdStation,:NiveauEau,:CumulePluie,:TauxCharge,:Date)") ;
 
         $tabTableau = array();
 
         while ($ligne = $requete->fetch()) {
             array_push($tabTableau, array(
-                $ligne['IdStation'],
+                $ligne['IdStation']=':IdStation',
                 $ligne['NiveauEau'],
                 $ligne['CumulePluie'],
                 $ligne['TauxCharge'],
