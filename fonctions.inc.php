@@ -20,28 +20,23 @@ function connexionBdd() {
     }
 }
 
-function majBd($IdStation, $NiveauEau, $CumulePluie, $TauxCharge, $Date) {
+function majBd($IdStation, $NiveauEau, $CumulPluie, $TauxCharge) {
     try {
         // connexion BDD
         $bdd = connexionBdd();
         // execution de la requete
-        $requete = $bdd->prepare("INSERT INTO Mesures (IdStation, NiveauEau, CumulePluie, TauxCharge, Date) VALUES (:IdStation,:NiveauEau,:CumulePluie,:TauxCharge,:Date)") ;
-
-        $tabTableau = array();
-
-        while ($ligne = $requete->fetch()) {
-            array_push($tabTableau, array(
-                $ligne->$requete['IdStation']=':IdStation',
-                $ligne['NiveauEau'],
-                $ligne['CumulePluie'],
-                $ligne['TauxCharge'],
-                $ligne['Date']));
-        }
-
-        $requete->closeCursor();
-        return $tabTableau;
+        $requete = $bdd->prepare("INSERT INTO Mesures (IdStation, NiveauEau, CumulPluie, TauxCharge) VALUES (:IdStation,:NiveauEau,:CumulPluie,:TauxCharge)") ;
+        $requete->bindParam(":IdStation", $IdStation);
+        $requete->bindParam(":NiveauEau", $NiveauEau);
+        $requete->bindParam(":CumulPluie", $CumulPluie);
+        $requete->bindParam(":TauxCharge", $TauxCharge);
+        //$requete->bindParam(":Date", $Date);
+        $requete->execute();
+        //$requete->closeCursor();
+        //return $tabTableau;
     } catch (PDOException $e) {
         print "Erreur : " . $e->getMessage() . "<br/>";
         die();
     }
 }
+

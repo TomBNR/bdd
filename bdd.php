@@ -12,7 +12,7 @@ and open the template in the editor.
     <body>
         <?php
         require_once './fonctions.inc.php';
-        getCallbacks();
+        majBd();
         ?>
     </body>
 </html>
