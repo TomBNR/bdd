@@ -1,5 +1,5 @@
 <?php
-
+//test
 define("SERVEURBDD", "172.18.58.86");
 define("LOGIN", "root");
 define("MOTDEPASSE", "toto");
