@@ -11,7 +11,7 @@ function connexionBdd() {
         $pdOptions = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
         $bdd = new PDO('mysql:host=' . SERVEURBDD . ';dbname=' . NOMDELABASE, LOGIN, MOTDEPASSE, $pdOptions);
         $bdd->exec('set names utf8');
-        echo "Connext > OK !";
+        echo "Connexion > OK !";
         return $bdd;
         //si erreur on tue le processus et on affiche le message d'erreur    
     } catch (PDOException $e) {
@@ -24,8 +24,8 @@ function getCallbacks() {
     try {
         // connexion BDD
         $bdd = connexionBdd();
-
-        $requete = $bdd->query("SELECT IdStation, NiveauEau, CumulePluie, TauxCharge, TensionBatterie, AmperageBatterie FROM Mesures;") ;
+        // execution de la requete
+        $requete = $bdd->query("INSERT INTO Mesures (IdStation, NiveauEau, CumulePluie, TauxCharge, Date) VALUES ('','','','','')") ;
 
         $tabTableau = array();
 
@@ -35,10 +35,10 @@ function getCallbacks() {
                 $ligne['NiveauEau'],
                 $ligne['CumulePluie'],
                 $ligne['TauxCharge'],
-                $ligne['TensionBatterie']));
+                $ligne['Date']));
         }
 
-        $requete->close();
+        $requete->closeCursor();
         return $tabTableau;
     } catch (PDOException $e) {
         print "Erreur : " . $e->getMessage() . "<br/>";
