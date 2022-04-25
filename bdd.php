@@ -11,8 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once './fonctions.inc.php';
-        majBd();
+        
+        //majBd($IdStation, $NiveauEau, $CumulPluie, $TauxCharge);
         ?>
     </body>
 </html>
