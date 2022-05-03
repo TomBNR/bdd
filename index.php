@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
+
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -17,9 +13,8 @@ and open the template in the editor.
                <br/>
                 device : <input type="text" placeholder="device" name="device" value="C50EE5" />
                  <br/>
-                 data : <input type="text" placeholder="data" name="data" value="FF2710FF64" />
+                 data : <input type="text" placeholder="data" name="data" value="FF2710FF646270ebbb" />
                 <br/>
-                time : <input type="text" placeholder="time" name="time" value="1648201592" />    
                  <input type="submit"/>
             </form>
         </div>
