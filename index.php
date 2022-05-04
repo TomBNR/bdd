@@ -11,7 +11,7 @@
             <form action="middleware.php" method="get">
                 
                <br/>
-                device : <input type="text" placeholder="device" name="device" value="C50EE5" />
+                device : <input type="text" placeholder="device" name="device" value="C50EE6" />
                  <br/>
                  data : <input type="text" placeholder="data" name="data" value="FF2710FF646270ebbb" />
                 <br/>

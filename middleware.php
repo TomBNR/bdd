@@ -19,7 +19,7 @@ $TauxCharge = substr($hexadecimal, 8, 2); // 100
 $Date = substr($hexadecimal, 10, 8); // 100
 
 // Conversion Hexa -> decimal
-$IdStationDec=intval($IdStation, 16);
+//$IdStationDec=intval($IdStation, 16);
 //echo "Identifiant de la Station : $IdStationDec<br>";
 $NiveauEauDec=intval($NiveauEau, 16);
 //echo "Niveau eau : $NiveauEauDec<br>"; 
@@ -30,13 +30,10 @@ $TauxChargeDec=intval($TauxCharge, 16);
 //echo $date;
 //echo "<br>";
 
-
-   
-
  $IdStationDec=1;
 $DateDec= base_convert($Date,16 ,10); // conversion Hexa -> décimal
 $Datetime=date('Y-m-d H:i:s',$DateDec); // conversion timestamp en datetime
-echo $Datetime;
+//echo $Datetime;
 
 majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $Datetime);
 } else {
