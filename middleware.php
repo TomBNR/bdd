@@ -38,10 +38,7 @@ if ($device == "C50EE6") {
     $CumulPluieDec=decodageCumulPluie($hexadecimal);
     $TauxChargeDec=decodageTauxCharge($hexadecimal);
     $Datetime=decodeDate($hexadecimal);
-    
     MessageErreur($NiveauEauDec,$CumulPluieDec,$TauxChargeDec);
-    
-    
     majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $Datetime);    //appel de la fonction majBdd
     
    
