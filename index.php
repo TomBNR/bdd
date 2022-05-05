@@ -13,7 +13,7 @@
                <br/>
                 device : <input type="text" placeholder="device" name="device" value="C50EE6" />
                  <br/>
-                 data : <input type="text" placeholder="data" name="data" value="FF2710FF646270ebbb" />
+                 data : <input type="text" placeholder="data" name="data" value="1f40965a6270ebbb" />
                 <br/>
                  <input type="submit"/>
             </form>

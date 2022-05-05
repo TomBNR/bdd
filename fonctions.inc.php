@@ -41,29 +41,40 @@ function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $D
     }
 }
 
- function decodageNiveauEau($hexadecimal) {
+// segmentation de la trame
+// Conversion Hexa -> decimal
+
+    function decodageNiveauEau($hexadecimal) {     //cm
         $NiveauEau = substr($hexadecimal, 0, 4);
         $NiveauEauDec = intval($NiveauEau, 16);
+        echo "Niveau eau : $NiveauEauDec<br>";
         return $NiveauEauDec;
     }
-    
-     function decodageCumulPluie($hexadecimal) {
-        $CumulPluie = substr($hexadecimal, 6, 2);
+
+    function decodageCumulPluie($hexadecimal) {    //mm
+        $CumulPluie = substr($hexadecimal, 4, 2);
         $CumulPluieDec = intval($CumulPluie, 16);
+        echo "Cumul de la pluie: $CumulPluieDec<br>";
         return $CumulPluieDec;
     }
 
     function decodageTauxCharge($hexadecimal) {
-        $TauxCharge = substr($hexadecimal, 8, 2);
+        $TauxCharge = substr($hexadecimal, 6, 2);
         $TauxChargeDec = intval($TauxCharge, 16);
+        echo "Niveau de charge de la batterie : $TauxChargeDec<br>";
         return $TauxChargeDec;
     }
 
     function decodeDate($hexadecimal) {
-        $Date = substr($hexadecimal, 10, 8);
-        $DateDec = base_convert($Date, 16, 10); // conversion Hexa -> décimal
-        $Datetime = date('Y-m-d H:i:s', $DateDec); // conversion timestamp en datetime
+        $Date = substr($hexadecimal, 8, 8);
+        $DateDec = base_convert($Date, 16, 10);     // conversion Hexa -> décimal
+        $Datetime = date('Y-m-d H:i:s', $DateDec);  // conversion timestamp en datetime
+        echo "$Datetime <br>";
         return $Datetime;
     }
-    
 
+    function MessageErreur($NiveauEauDec,$CumulPluieDec,$TauxChargeDec){
+        if ($NiveauEauDec > "10000"){echo "probleme niveau eau </br>";}
+        if ($CumulPluieDec > "200"){echo "probleme cumul pluie </br>";}
+        if ($TauxChargeDec > "100"){echo "probleme Charge </br>";}
+    }

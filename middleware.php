@@ -17,8 +17,6 @@ $hexadecimal = $_GET['data'];
   $TauxCharge = substr($hexadecimal, 8, 2);   // 100
   $Date = substr($hexadecimal, 10, 8);
 
-  //$IdStationDec=intval($IdStation, 16);
-  //echo "Identifiant de la Station : $IdStationDec<br>";
   $NiveauEauDec = intval($NiveauEau, 16);
   //echo "Niveau eau : $NiveauEauDec<br>";
   $CumulPluieDec = intval($CumulPluie, 16);
@@ -40,8 +38,14 @@ if ($device == "C50EE6") {
     $CumulPluieDec=decodageCumulPluie($hexadecimal);
     $TauxChargeDec=decodageTauxCharge($hexadecimal);
     $Datetime=decodeDate($hexadecimal);
+    
+    MessageErreur($NiveauEauDec,$CumulPluieDec,$TauxChargeDec);
+    
+    
     majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $Datetime);    //appel de la fonction majBdd
     
+   
+    
 } else {
-    echo "le device $device invailide";
+    echo "le device $device est invalide";
 }
