@@ -22,17 +22,17 @@ function connexionBdd() {
     }
 }
 
-function majBdd($IdStation, $NiveauEau, $CumulPluie, $TauxCharge, $Date) {
+function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $DateTime) {
     try {
         // connexion BDD
         $bdd = connexionBdd();
         // execution de la requete
         $requete = $bdd->prepare("INSERT INTO Mesures (IdStation, NiveauEau, CumulPluie, TauxCharge, Date) VALUES (:IdStation,:NiveauEau,:CumulPluie,:TauxCharge,:Date)") ;
-        $requete->bindParam(":IdStation", $IdStation);
-        $requete->bindParam(":NiveauEau", $NiveauEau);
-        $requete->bindParam(":CumulPluie", $CumulPluie);
-        $requete->bindParam(":TauxCharge", $TauxCharge);
-        $requete->bindParam(":Date", $Date);
+        $requete->bindParam(":IdStation", $IdStationDec);
+        $requete->bindParam(":NiveauEau", $NiveauEauDec);
+        $requete->bindParam(":CumulPluie", $CumulPluieDec);
+        $requete->bindParam(":TauxCharge", $TauxChargeDec);
+        $requete->bindParam(":Date", $DateTime);
         $requete->execute();
 
     } catch (PDOException $e) {
@@ -40,4 +40,30 @@ function majBdd($IdStation, $NiveauEau, $CumulPluie, $TauxCharge, $Date) {
         die();
     }
 }
+
+ function decodageNiveauEau($hexadecimal) {
+        $NiveauEau = substr($hexadecimal, 0, 4);
+        $NiveauEauDec = intval($NiveauEau, 16);
+        return $NiveauEauDec;
+    }
+    
+     function decodageCumulPluie($hexadecimal) {
+        $CumulPluie = substr($hexadecimal, 6, 2);
+        $CumulPluieDec = intval($CumulPluie, 16);
+        return $CumulPluieDec;
+    }
+
+    function decodageTauxCharge($hexadecimal) {
+        $TauxCharge = substr($hexadecimal, 8, 2);
+        $TauxChargeDec = intval($TauxCharge, 16);
+        return $TauxChargeDec;
+    }
+
+    function decodeDate($hexadecimal) {
+        $Date = substr($hexadecimal, 10, 8);
+        $DateDec = base_convert($Date, 16, 10); // conversion Hexa -> décimal
+        $Datetime = date('Y-m-d H:i:s', $DateDec); // conversion timestamp en datetime
+        return $Datetime;
+    }
+    
 
