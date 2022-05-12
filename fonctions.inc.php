@@ -1,4 +1,5 @@
 <?php
+
 require_once './constante.inc';
 
 function connexionBdd() {
@@ -42,21 +43,21 @@ function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $D
     function decodageNiveauEau($hexadecimal) {     //cm
         $NiveauEau = substr($hexadecimal, 0, 4);
         $NiveauEauDec = intval($NiveauEau, 16);
-        //echo "Niveau eau : $NiveauEauDec cm<br>";
+        echo "Niveau eau : $NiveauEauDec cm<br>";
         return $NiveauEauDec;
     }
 
     function decodageCumulPluie($hexadecimal) {    //mm
         $CumulPluie = substr($hexadecimal, 4, 2);
         $CumulPluieDec = intval($CumulPluie, 16);
-        //echo "Cumul de la pluie: $CumulPluieDec mm<br>";
+        echo "Cumul de la pluie: $CumulPluieDec mm<br>";
         return $CumulPluieDec;
     }
 
     function decodageTauxCharge($hexadecimal) {
         $TauxCharge = substr($hexadecimal, 6, 2);
         $TauxChargeDec = intval($TauxCharge, 16);
-        //echo "Niveau de charge de la batterie : $TauxChargeDec %<br>";
+        echo "Niveau de charge de la batterie : $TauxChargeDec %<br>";
         return $TauxChargeDec;
     }
 
@@ -64,7 +65,7 @@ function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $D
         $Date = substr($hexadecimal, 8, 8);
         $DateDec = base_convert($Date, 16, 10);     // conversion Hexa -> décimal
         $Datetime = date('Y-m-d', $DateDec);  // conversion timestamp en datetime
-        //echo "$Datetime <br>";
+        echo "$Datetime <br>";
         return $Datetime;
     }
 

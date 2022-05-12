@@ -7,7 +7,7 @@ require_once 'fonctions.inc.php';
 
 $device = $_GET['device'];
 $hexadecimal = $_GET['data'];
-$Date=$_GET['time']; // temps sigfox
+//$Date=$_GET['time']; // temps sigfox
 
 if ($device == "DEVICE") {
     $IdStationDec = 1;
