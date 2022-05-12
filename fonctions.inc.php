@@ -1,9 +1,5 @@
 <?php
-
-define("SERVEURBDD", "localhost");
-define("LOGIN", "root");
-define("MOTDEPASSE", "toto");
-define("NOMDELABASE", "mesure_piezometrique");
+require_once './constante.inc';
 
 function connexionBdd() {
     try {
