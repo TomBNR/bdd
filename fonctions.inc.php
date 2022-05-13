@@ -2,6 +2,11 @@
 
 require_once './constante.inc';
 
+/**
+ * Connexion à la base de données en fonction du SERVEURBDD, NOMDELABASE, LOGIN, MOTDEPASSE
+ * renseigné dans le fichier constante
+ * @return \PDO
+ */
 function connexionBdd() {
     try {
         $pdOptions = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
@@ -18,14 +23,22 @@ function connexionBdd() {
     }
 }
 
-function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $DateTime) {
+/**
+ * Ajout des données dans la base de données avec INSERT INTO
+ * @param type $IdStationDec numéro de la station
+ * @param type EauDec niveau d'eau relever par le capteur
+ * @param type $CumulPluieDec cumul de pluie 
+ * @param type $TauxChargeDec Niveau charge de la batterie de l'esp32
+ * @param type $DateTime Date à laquel la mesure a été effectué 
+ */
+function majBdd($IdStationDec, $EauDec, $CumulPluieDec, $TauxChargeDec, $DateTime) {
     try {
         // connexion BDD
         $bdd = connexionBdd();
         // execution de la requete
-        $requete = $bdd->prepare("INSERT INTO Mesures (IdStation, NiveauEau, CumulPluie, TauxCharge, Date) VALUES (:IdStation,:NiveauEau,:CumulPluie,:TauxCharge,:Date)") ;
+        $requete = $bdd->prepare("INSERT INTO Mesures (IdStation, Eau, CumulPluie, TauxCharge, Date) VALUES (:IdStation,:Eau,:CumulPluie,:TauxCharge,:Date)") ;
         $requete->bindParam(":IdStation", $IdStationDec);
-        $requete->bindParam(":NiveauEau", $NiveauEauDec);
+        $requete->bindParam(":Eau", $EauDec);
         $requete->bindParam(":CumulPluie", $CumulPluieDec);
         $requete->bindParam(":TauxCharge", $TauxChargeDec);
         $requete->bindParam(":Date", $DateTime);
@@ -39,12 +52,16 @@ function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $D
 
 // segmentation de la trame
 // Conversion Hexa -> decimal
-
-    function decodageNiveauEau($hexadecimal) {     //cm
-        $NiveauEau = substr($hexadecimal, 0, 4);
-        $NiveauEauDec = intval($NiveauEau, 16);
-        echo "Niveau eau : $NiveauEauDec cm<br>";
-        return $NiveauEauDec;
+/**
+ * decode la trame hexadécimal et la converti en décimal en prenant les 4 premiers chiffres
+ * @param type $hexadecimal
+ * @return type
+ */
+    function decodageEau($hexadecimal) {     //cm
+        $Eau = substr($hexadecimal, 0, 4);
+        $EauDec = intval($Eau, 16);
+        echo "Eau : $EauDec cm<br>";
+        return $EauDec;
     }
 
     function decodageCumulPluie($hexadecimal) {    //mm
@@ -69,8 +86,8 @@ function majBdd($IdStationDec, $NiveauEauDec, $CumulPluieDec, $TauxChargeDec, $D
         return $Datetime;
     }
 
-    function MessageErreur($NiveauEauDec,$CumulPluieDec,$TauxChargeDec){
-        if ($NiveauEauDec > "10000"){echo "probleme niveau eau </br>";}
+    function MessageErreur($EauDec,$CumulPluieDec,$TauxChargeDec){
+        if ($EauDec > "10000"){echo "probleme eau </br>";}
         if ($CumulPluieDec > "200"){echo "probleme cumul pluie </br>";}
         if ($TauxChargeDec > "100"){echo "probleme Charge </br>";}
     }

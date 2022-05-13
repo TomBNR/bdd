@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/php_prog/bdd/index.php</file>
             <file>file:/C:/xampp/htdocs/php_prog/bdd/middleware.php</file>
+            <file>file:/C:/xampp/htdocs/php_prog/bdd/constante.inc</file>
             <file>file:/C:/xampp/htdocs/php_prog/bdd/fonctions.inc.php</file>
         </group>
     </open-files>
