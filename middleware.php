@@ -1,8 +1,6 @@
 <?php
 
 require_once 'fonctions.inc.php';
-
-// phpinfo(); // php v7.3
 // middeware : http://195.221.61.190/station2022/
 
 

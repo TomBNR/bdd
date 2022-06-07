@@ -13,6 +13,8 @@ function connexionBdd() {
         $bdd = new PDO('mysql:host=' . SERVEURBDD . ';dbname=' . NOMDELABASE, LOGIN, MOTDEPASSE, $pdOptions);
         $bdd->exec('set names utf8');
         echo "Connexion base de données > OK !";
+        echo "<br/>";
+        echo "Enregistrement base de données > OK !";
         return $bdd;
         //si erreur on tue le processus et on affiche le message d'erreur    
     } catch (PDOException $e) {
